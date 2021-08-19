@@ -16,6 +16,12 @@ public class TrajectoryDrawer : MonoBehaviour
     }
 
 
+    public void RemoveTrajectory() {
+
+        _lineRenderer.positionCount = default;            
+    }
+
+
     public void UpdateTrajectory(Rigidbody projectile, Vector3 startPoint, Vector3 force) {
 
         Vector3 velocity = force / projectile.mass * Time.fixedDeltaTime;
