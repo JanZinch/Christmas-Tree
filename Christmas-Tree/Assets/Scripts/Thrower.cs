@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Thrower : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _projectilePrefab = null;
+    [SerializeField] private Projectile _projectilePrefab = null;
     [SerializeField] private Transform _startPoint = null;
     [SerializeField] private Vector3 _forceMultiplier = Vector3.one;
     [SerializeField] private float _recharge = default;
@@ -13,7 +13,7 @@ public class Thrower : MonoBehaviour
 
     private Vector3 _startMousePoint = default;
     private Vector3 _currentMousePoint = default;
-    private Rigidbody _projectile = null;
+    private Projectile _projectile = null;
 
     private WaitForSeconds _rechargeWaiting = null;
 
@@ -22,7 +22,7 @@ public class Thrower : MonoBehaviour
         if (_projectile == null) return;
 
         _startMousePoint = _currentMousePoint = Input.mousePosition;
-        _drawer.UpdateTrajectory(_projectile, _projectile.transform.position, MakeForceFromScreen());
+        _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, MakeForceFromScreen());
     }
 
     private void OnMouseDrag()
@@ -30,7 +30,7 @@ public class Thrower : MonoBehaviour
         if (_projectile == null) return;
 
         _currentMousePoint = Input.mousePosition;
-        _drawer.UpdateTrajectory(_projectile, _projectile.transform.position, MakeForceFromScreen());
+        _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, MakeForceFromScreen());
     }
 
 
@@ -40,8 +40,8 @@ public class Thrower : MonoBehaviour
 
         Vector3 force = MakeForceFromScreen();
 
-        _drawer.UpdateTrajectory(_projectile, _projectile.transform.position, force);
-        _projectile.AddForce(force);
+        _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, force);
+        _projectile.Rigidbody.AddForce(force);
 
         StartCoroutine(SetProjectileToScene(_rechargeWaiting));
 
@@ -63,14 +63,17 @@ public class Thrower : MonoBehaviour
 
     private void SetProjectileToScene() {
 
-        _projectile = Instantiate<Rigidbody>(_projectilePrefab, _startPoint.position, Quaternion.identity);    
+        //_projectile = Instantiate<Rigidbody>(_projectilePrefab, _startPoint.position, Quaternion.identity);    
+
+        _projectile = PoolsManager.GetObject("ChristmasBall", _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+    
     }
 
     private IEnumerator SetProjectileToScene(WaitForSeconds wait)
     {
         yield return wait;
 
-        _projectile = Instantiate<Rigidbody>(_projectilePrefab, _startPoint.position, Quaternion.identity);
+        _projectile = PoolsManager.GetObject("ChristmasBall", _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
     }
 
     private void Awake()
