@@ -11,7 +11,7 @@ public class PoolsExplorer : MonoBehaviour
 	{
 		for (int i = 0; i < _pools.Length; i++)
 		{
-			_pools[i].prefabName = _pools[i].prefab.name;
+			_pools[i].prefabId = i;
 		}
 	}
 

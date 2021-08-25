@@ -41,6 +41,7 @@ public class Thrower : MonoBehaviour
         Vector3 force = MakeForceFromScreen();
 
         _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, force);
+        _projectile.Rigidbody.isKinematic = false;
         _projectile.Rigidbody.AddForce(force);
 
         StartCoroutine(SetProjectileToScene(_rechargeWaiting));
@@ -62,18 +63,17 @@ public class Thrower : MonoBehaviour
 
 
     private void SetProjectileToScene() {
-
-        //_projectile = Instantiate<Rigidbody>(_projectilePrefab, _startPoint.position, Quaternion.identity);    
-
-        _projectile = PoolsManager.GetObject("ChristmasBall", _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
-    
+ 
+        _projectile = PoolsManager.GetObject((int) Decoration.STAR, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        _projectile.Rigidbody.isKinematic = true;
     }
 
     private IEnumerator SetProjectileToScene(WaitForSeconds wait)
     {
         yield return wait;
 
-        _projectile = PoolsManager.GetObject("ChristmasBall", _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        _projectile = PoolsManager.GetObject((int) Decoration.CANDY_CANE, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        _projectile.Rigidbody.isKinematic = true;
     }
 
     private void Awake()
