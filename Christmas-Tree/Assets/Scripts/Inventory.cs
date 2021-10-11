@@ -11,13 +11,8 @@ static class Inventory
 
     static Inventory() {
 
-        //_inventory = new Dictionary<int, int>(5);
-
-        //_inventory.Add((int)Decoration.ORANGE_BALL, 5);
-        //_inventory.Add((int)Decoration.TEDDY_BEAR, 1);
 
         _indices = new List<int>((int[]) Enum.GetValues(typeof(Decoration)));
-
         _inventory = new Dictionary<Decoration, int>();
         
         _inventory.Add(Decoration.TEDDY_BEAR, 1);
@@ -28,8 +23,8 @@ static class Inventory
         _inventory.Add(Decoration.SNOWMAN, 1);
         _inventory.Add(Decoration.SOCK, 1);
         _inventory.Add(Decoration.STAR, 1);
-
-       
+        _inventory.Add(Decoration.PRESENT_BLUE, 1);
+        _inventory.Add(Decoration.PRESENT_WHITE, 1);
 
     }
 
@@ -45,11 +40,9 @@ static class Inventory
         int projPrefId = _indices[UnityEngine.Random.Range(0, _indices.Count)];
 
         int count = 0;
-
         Projectile result = null;
 
         _inventory.TryGetValue((Decoration)projPrefId, out count);
-
 
         while (count <= 0) {
 
@@ -83,58 +76,32 @@ static class Inventory
 
 
 
-    public static Projectile GetRandomProjectile(Vector3 position, Quaternion rotation) {
+    //public static Projectile GetRandomProjectile(Vector3 position, Quaternion rotation) {
 
         
-        int projPrefId = UnityEngine.Random.Range(0, _indices.Count);
+    //    int projPrefId = UnityEngine.Random.Range(0, _indices.Count);
 
-        Projectile result;
+    //    Projectile result;
 
-        if (PoolsManager.GetObject(_indices[projPrefId], position, rotation).TryGetComponent<Projectile>(out result))
-        {
-            return result;
-        }
-        else {
-
-            throw new Exception("Bad projectile");        
-        }
-
-        
-    }
-
-
-    //public bool GetProjectile(int id, out Projectile projectile) {
-
-    //    int count;
-
-    //    if (_inventory.TryGetValue(id, out count)) {
-
-    //        _inventory.Remove(id);
-
-    //        if (count > 0)
-    //        {
-    //            count--;
-    //            _inventory.Add(id, count);
-
-    //            //projectile = PoolsManager.GetObject(1, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
-
-    //            return true;
-    //        }
-    //        else {
-
-    //            projectile = null;
-    //            return false;            
-    //        }
-
-
+    //    if (PoolsManager.GetObject(_indices[projPrefId], position, rotation).TryGetComponent<Projectile>(out result))
+    //    {
+    //        return result;
     //    }
-    
+    //    else {
+
+    //        throw new Exception("Bad projectile");        
+    //    }
+
+        
     //}
+
+
+  
 
 }
 
 enum Decoration : int { 
 
-    ORANGE_BALL, TEDDY_BEAR, CANDY_CANE, STAR, RED_BALL, SNOWMAN, SOCK, BELL
+    ORANGE_BALL, TEDDY_BEAR, CANDY_CANE, STAR, RED_BALL, SNOWMAN, SOCK, BELL, PRESENT_BLUE, PRESENT_WHITE
 
 }
