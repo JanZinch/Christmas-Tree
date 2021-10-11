@@ -47,6 +47,8 @@ public class Thrower : MonoBehaviour
         StartCoroutine(SetProjectileToScene(_rechargeWaiting));
 
         _drawer.RemoveTrajectory();
+
+        _projectile = null;
     }
 
 
@@ -58,22 +60,44 @@ public class Thrower : MonoBehaviour
         differency.y *= _forceMultiplier.y;
         differency.z = differency.y;
 
+
+        if (differency.y < 0.0f) {
+
+            differency.y = Mathf.Abs(differency.y);
+            differency.z = Mathf.Abs(differency.z);
+            differency.x *= -1;
+        }
+
+        
+        
+
+        Debug.Log("DIF: " + differency);
+
         return differency;
     }
 
 
     private void SetProjectileToScene() {
- 
-        _projectile = PoolsManager.GetObject((int) Decoration.STAR, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+
+        _projectile = Inventory.GetRandomProjectile(_startPoint.position, Quaternion.identity);
+
+        //_projectile = PoolsManager.GetObject((int) Decoration.STAR, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
         _projectile.Rigidbody.isKinematic = true;
+
+
+    
     }
 
     private IEnumerator SetProjectileToScene(WaitForSeconds wait)
     {
         yield return wait;
 
-        _projectile = PoolsManager.GetObject((int) Decoration.CANDY_CANE, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
+        _projectile = Inventory.GetRandomProjectile(_startPoint.position, Quaternion.identity);
+
+        //_projectile = PoolsManager.GetObject((int) Decoration.CANDY_CANE, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
         _projectile.Rigidbody.isKinematic = true;
+
+        
     }
 
     private void Awake()
