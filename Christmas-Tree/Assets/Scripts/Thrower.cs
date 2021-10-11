@@ -79,7 +79,9 @@ public class Thrower : MonoBehaviour
 
     private void SetProjectileToScene() {
 
-        _projectile = Inventory.GetRandomProjectile(_startPoint.position, Quaternion.identity);
+        _projectile = Inventory.GetProjectile(_startPoint.position, Quaternion.identity);
+
+        if (_projectile == null) return;
 
         //_projectile = PoolsManager.GetObject((int) Decoration.STAR, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
         _projectile.Rigidbody.isKinematic = true;
@@ -92,7 +94,11 @@ public class Thrower : MonoBehaviour
     {
         yield return wait;
 
-        _projectile = Inventory.GetRandomProjectile(_startPoint.position, Quaternion.identity);
+        _projectile = Inventory.GetProjectile(_startPoint.position, Quaternion.identity);
+
+        if (_projectile == null) Debug.Log("PROJECTILE IS NULL");
+
+        if (_projectile == null) yield break;
 
         //_projectile = PoolsManager.GetObject((int) Decoration.CANDY_CANE, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
         _projectile.Rigidbody.isKinematic = true;
