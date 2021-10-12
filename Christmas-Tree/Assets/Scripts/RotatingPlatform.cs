@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RotatingPlatform : MonoBehaviour
 {
-    [SerializeField] private Vector3 _rotationSpeed = new Vector3(0.0f, 10.0f, 0.0f);
+    [SerializeField] private Vector3 _rotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
 
     public event Action OnPlatformRotate = null;
 
@@ -19,7 +19,7 @@ public class RotatingPlatform : MonoBehaviour
     }
 
 
-    public void AddToThree(Transform projectile) {
+    public void StartRotationAroundTree(Transform projectile) {
 
         OnPlatformRotate += delegate () { projectile.RotateAround(transform.position, Vector3.up,_rotationSpeed.y); };
     }

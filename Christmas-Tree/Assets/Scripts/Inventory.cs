@@ -33,6 +33,12 @@ static class Inventory
         return _inventory.Count == 0 || _indices.Count == 0;
     }
 
+    private static bool IsMassive(Decoration decoration) {
+
+        return decoration == Decoration.PRESENT_BLUE || decoration == Decoration.PRESENT_WHITE || decoration == Decoration.TEDDY_BEAR;
+    }
+
+
     public static Projectile GetProjectile(Vector3 position, Quaternion rotation)
     {
         if (IsEmpty()) return null;
@@ -62,6 +68,12 @@ static class Inventory
 
         if (result != null)
         {
+            if (IsMassive((Decoration)projPrefId)) {
+
+                result.IsMassive = true;
+            }
+
+
             return result;
         }
         else {
