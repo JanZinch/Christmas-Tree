@@ -67,4 +67,14 @@ public class Projectile : MonoBehaviour
     }
 
 
+    private void OnCollisionExit(Collision collision){
+
+        if (!_isAttached && collision.transform.parent != null && collision.transform.parent.TryGetComponent<RotatingPlatform>(out RotatingPlatform rotatingPlatform))
+        {
+            rotatingPlatform.StopRotationAroundTree(this.transform);
+            this.Rigidbody.isKinematic = false;
+
+        }
+    }
+
 }
