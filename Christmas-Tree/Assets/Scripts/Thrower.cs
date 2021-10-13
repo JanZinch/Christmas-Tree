@@ -11,6 +11,8 @@ public class Thrower : MonoBehaviour
 
     [SerializeField] private TrajectoryDrawer _drawer = null;
 
+    public static Transform StartPoint { get; private set; }
+
     private Vector3 _startMousePoint = default;
     private Vector3 _currentMousePoint = default;
     private Projectile _projectile = null;
@@ -108,6 +110,7 @@ public class Thrower : MonoBehaviour
 
     private void Awake()
     {
+        StartPoint = _startPoint;
         _rechargeWaiting = new WaitForSeconds(_recharge);
     }
 

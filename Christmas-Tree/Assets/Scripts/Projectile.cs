@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody = null;
 
+    [SerializeField] private float _price = default;
+
     private bool _isAttached = false;
     private bool _isFailed = false;
     public bool IsMassive { get; set; } = false;
@@ -19,10 +21,7 @@ public class Projectile : MonoBehaviour
 
             if (otherProjectile._isAttached)
             {
-
-
-
-
+                ScoreCounter.Instance.Substract(otherProjectile._price);
             }
 
 
@@ -39,8 +38,12 @@ public class Projectile : MonoBehaviour
             
             rotatingPlatform?.StartRotationAroundTree(this.transform);
 
-            if (this.IsMassive) this.Rigidbody.isKinematic = true;
-
+            if (this.IsMassive)
+            {
+                this.Rigidbody.isKinematic = true;
+                ScoreCounter.Instance.Add(this._price);
+                _isAttached = true;                         // mb
+            }
 
 
         }
@@ -53,11 +56,32 @@ public class Projectile : MonoBehaviour
 
         if (!_isAttached && !_isFailed && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
         {
-            christmasTree.Platform.StartRotationAroundTree(this.transform);
+            if (IsMassive)
+            {
+                this.Rigidbody.velocity = Vector3.zero;
+                Vector3 resist = Vector3.Normalize(Thrower.StartPoint.position - this.transform.position) * christmasTree.BranchesForce;
+                resist.y = 0.0f;
 
-            this.Rigidbody.isKinematic = true;
+                this.Rigidbody.AddForce(resist);
 
-            _isAttached = true;
+                Debug.Log("FORCE: " + resist);
+            
+            }
+            else {
+
+
+                christmasTree.Platform.StartRotationAroundTree(this.transform);
+
+                this.Rigidbody.isKinematic = true;
+
+                _isAttached = true;
+
+                ScoreCounter.Instance.Add(this._price);
+
+            }
+
+
+            
         }
         
 

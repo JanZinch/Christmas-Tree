@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2917535413201678473}
+  _price: 35
 --- !u!54 &2917535413201678473
 Rigidbody:
   m_ObjectHideFlags: 0
