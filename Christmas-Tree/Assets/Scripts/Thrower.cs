@@ -73,7 +73,7 @@ public class Thrower : MonoBehaviour
         
         
 
-        Debug.Log("DIF: " + differency);
+        //Debug.Log("DIF: " + differency);
 
         return differency;
     }

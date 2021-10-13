@@ -32,5 +32,12 @@ public class ScoreCounter : MonoBehaviour
         _count -= count;
         UpdateText();
     }
+
+    public float GetCount() {
+
+        return _count;
+    }
+
+
    
 }
