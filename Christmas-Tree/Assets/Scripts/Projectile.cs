@@ -19,8 +19,15 @@ public class Projectile : MonoBehaviour
             if (this._isFailed || otherProjectile._isFailed) return;
 
 
-            if (otherProjectile._isAttached)
+            if (this._isAttached)
             {
+                ScoreCounter.Instance.Substract(this._price);
+                Debug.Log("THIS");
+            }
+            else if (otherProjectile._isAttached) {
+
+                Debug.Log("OTHER");
+                int a = 0;
                 ScoreCounter.Instance.Substract(otherProjectile._price);
             }
 

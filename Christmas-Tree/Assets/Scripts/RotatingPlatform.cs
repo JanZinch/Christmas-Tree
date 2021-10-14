@@ -65,6 +65,8 @@ public class RotatingPlatform : MonoBehaviour
         //OnPlatformRotate += delegate () { projectile.RotateAround(transform.position, Vector3.up,_rotationSpeed.y); };
 
         _attachedObjects.Add(projectile);
+        projectile.parent = this.transform;
+        
         CheckScore();
     
     }
@@ -72,6 +74,7 @@ public class RotatingPlatform : MonoBehaviour
     public void StopRotationAroundTree(Transform projectile) {
 
         _attachedObjects.Remove(projectile);
+        projectile.parent = null;
         CheckScore();
 
     }
@@ -82,11 +85,11 @@ public class RotatingPlatform : MonoBehaviour
     {
         OnPlatformRotate?.Invoke();
 
-        foreach (Transform transform in _attachedObjects) {
+        //foreach (Transform transform in _attachedObjects) {
 
-            transform.RotateAround(this.transform.position, Vector3.up, _rotationSpeed.y);
+          //  transform.RotateAround(this.transform.position, Vector3.up, _rotationSpeed.y);
 
-        }
+        //}
     }
 
 }
