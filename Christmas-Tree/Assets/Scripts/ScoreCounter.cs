@@ -7,8 +7,13 @@ public class ScoreCounter : MonoBehaviour
 {
     public static ScoreCounter Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI _text = null;
+    [SerializeField] private TextMeshProUGUI _counterText = null;
+    [SerializeField] private TextMeshProUGUI _differenceText = null;
+    [SerializeField] private Animator _differenceTextAnim = null;
+
     private float _count = 0.0f;
+
+    private const string ViewParam = "View";
 
     private void Awake()
     {
@@ -18,8 +23,14 @@ public class ScoreCounter : MonoBehaviour
 
     private void UpdateText()
     {
-        _text.text = _count.ToString();
+        _counterText.text = _count.ToString();
+
+        _differenceTextAnim.SetBool(ViewParam, true);
+
     }
+
+   
+
 
     public void Add(float count) {
 

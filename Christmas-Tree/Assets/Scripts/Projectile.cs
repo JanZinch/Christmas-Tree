@@ -27,7 +27,6 @@ public class Projectile : MonoBehaviour
             else if (otherProjectile._isAttached) {
 
                 Debug.Log("OTHER");
-                int a = 0;
                 ScoreCounter.Instance.Substract(otherProjectile._price);
             }
 

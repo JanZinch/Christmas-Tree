@@ -7,7 +7,7 @@ public class RotatingPlatform : MonoBehaviour
 {
     [SerializeField] private Vector3 _rotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
 
-    [SerializeField] private List<Transform> _attachedObjects = null;
+    //[SerializeField] private List<Transform> _attachedObjects = null;
 
     private int _stage = 0;
 
@@ -15,7 +15,7 @@ public class RotatingPlatform : MonoBehaviour
 
     private void Awake()
     {
-        _attachedObjects = new List<Transform>();
+        //_attachedObjects = new List<Transform>();
     }
 
     private void OnEnable()
@@ -42,7 +42,7 @@ public class RotatingPlatform : MonoBehaviour
 
     private void NextStage() {
 
-        this.transform.eulerAngles = new Vector3(0.0f, this.transform.eulerAngles.y, UnityEngine.Random.Range(0.0f, 3.5f));
+        this.transform.eulerAngles = new Vector3(UnityEngine.Random.Range(0.0f, 3.5f), this.transform.eulerAngles.y, UnityEngine.Random.Range(0.0f, 3.5f));
 
         int direction = UnityEngine.Random.Range(0, 2);
         if (direction == 0)
@@ -64,7 +64,7 @@ public class RotatingPlatform : MonoBehaviour
 
         //OnPlatformRotate += delegate () { projectile.RotateAround(transform.position, Vector3.up,_rotationSpeed.y); };
 
-        _attachedObjects.Add(projectile);
+        //_attachedObjects.Add(projectile);
         projectile.parent = this.transform;
         
         CheckScore();
@@ -73,7 +73,7 @@ public class RotatingPlatform : MonoBehaviour
 
     public void StopRotationAroundTree(Transform projectile) {
 
-        _attachedObjects.Remove(projectile);
+        //_attachedObjects.Remove(projectile);
         projectile.parent = null;
         CheckScore();
 
