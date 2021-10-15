@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Thrower : MonoBehaviour
@@ -18,6 +18,9 @@ public class Thrower : MonoBehaviour
     private Projectile _projectile = null;
 
     private WaitForSeconds _rechargeWaiting = null;
+
+    public static event Action OnInventoryEmpty = null;
+
 
     private void OnMouseDown()
     {
@@ -83,12 +86,16 @@ public class Thrower : MonoBehaviour
 
         _projectile = Inventory.GetProjectile(_startPoint.position, Quaternion.identity);
 
-        if (_projectile == null) return;
+        if (_projectile == null)
+        {
+            OnInventoryEmpty?.Invoke();
+        }
+        else {
 
-        //_projectile = PoolsManager.GetObject((int) Decoration.STAR, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
-        _projectile.Rigidbody.isKinematic = true;
+            _projectile.Rigidbody.isKinematic = true;
+        }
 
-
+      
     
     }
 
@@ -98,12 +105,24 @@ public class Thrower : MonoBehaviour
 
         _projectile = Inventory.GetProjectile(_startPoint.position, Quaternion.identity);
 
-        if (_projectile == null) Debug.Log("PROJECTILE IS NULL");
+        //if (_projectile == null) Debug.Log("PROJECTILE IS NULL");
 
-        if (_projectile == null) yield break;
+        if (_projectile == null)
+        {
+            OnInventoryEmpty?.Invoke();
+        }
+        else
+        {
+
+            _projectile.Rigidbody.isKinematic = true;
+        }
+
+        yield return null;
+
+        //if (_projectile == null) yield break;
 
         //_projectile = PoolsManager.GetObject((int) Decoration.CANDY_CANE, _startPoint.position, Quaternion.identity).GetComponent<Projectile>();
-        _projectile.Rigidbody.isKinematic = true;
+       // _projectile.Rigidbody.isKinematic = true;
 
         
     }

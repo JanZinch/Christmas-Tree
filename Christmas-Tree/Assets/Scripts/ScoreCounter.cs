@@ -9,16 +9,24 @@ public class ScoreCounter : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _counterText = null;
     [SerializeField] private TextMeshProUGUI _differenceText = null;
+
+    [SerializeField] private Animator _counterTextAnim = null;
     [SerializeField] private Animator _differenceTextAnim = null;
 
     private float _count = 0.0f;
 
     private const string ViewParam = "View";
+    private const string FinishParam = "Finish";
 
     private void Awake()
     {
         if (Instance != null) throw new Exception("There can be only one ScoreCounter object.");
         Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        Thrower.OnInventoryEmpty += delegate() { _counterTextAnim.SetTrigger(FinishParam); };
     }
 
     private void UpdateText()

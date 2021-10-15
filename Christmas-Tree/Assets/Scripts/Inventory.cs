@@ -9,22 +9,24 @@ static class Inventory
 
     private static List<int> _indices = null;
 
+    private const int StartPosition = 1;
+
     static Inventory() {
 
 
         _indices = new List<int>((int[]) Enum.GetValues(typeof(Decoration)));
         _inventory = new Dictionary<Decoration, int>();
         
-        _inventory.Add(Decoration.TEDDY_BEAR, 1);
-        _inventory.Add(Decoration.BELL, 3);
-        _inventory.Add(Decoration.CANDY_CANE, 4);
+        //_inventory.Add(Decoration.TEDDY_BEAR, 1);
+        //_inventory.Add(Decoration.BELL, 3);
+        //_inventory.Add(Decoration.CANDY_CANE, 4);
         _inventory.Add(Decoration.ORANGE_BALL, 4);
-        _inventory.Add(Decoration.RED_BALL, 4);
-        _inventory.Add(Decoration.SNOWMAN, 3);
-        _inventory.Add(Decoration.SOCK, 4);
+        //_inventory.Add(Decoration.RED_BALL, 4);
+        //_inventory.Add(Decoration.SNOWMAN, 3);
+        //_inventory.Add(Decoration.SOCK, 4);        
+        _inventory.Add(Decoration.BLUE_PRESENT, 1);
+        //_inventory.Add(Decoration.WHITE_PRESENT, 1);
         _inventory.Add(Decoration.STAR, 1);
-        _inventory.Add(Decoration.PRESENT_BLUE, 1);
-        _inventory.Add(Decoration.PRESENT_WHITE, 1);
 
     }
 
@@ -33,9 +35,15 @@ static class Inventory
         return _inventory.Count == 0 || _indices.Count == 0;
     }
 
+    private static bool HasOnlyStar() {
+
+        return _inventory.Count == StartPosition || _indices.Count == StartPosition;
+
+    }
+
     private static bool IsMassive(Decoration decoration) {
 
-        return decoration == Decoration.PRESENT_BLUE || decoration == Decoration.PRESENT_WHITE || decoration == Decoration.TEDDY_BEAR;
+        return decoration == Decoration.BLUE_PRESENT || decoration == Decoration.WHITE_PRESENT || decoration == Decoration.TEDDY_BEAR;
     }
 
 
@@ -43,23 +51,52 @@ static class Inventory
     {
         if (IsEmpty()) return null;
 
-        int projPrefId = _indices[UnityEngine.Random.Range(0, _indices.Count)];
-
         int count = 0;
         Projectile result = null;
+        int projPrefId;
 
-        _inventory.TryGetValue((Decoration)projPrefId, out count);
+        //if (HasOnlyStar()) { 
 
-        while (count <= 0) {
-
-            _inventory.Remove((Decoration)projPrefId);
-            _indices.Remove(projPrefId);
-
-            if (IsEmpty()) return null;
-
-            projPrefId = _indices[UnityEngine.Random.Range(0, _indices.Count)];          
+        //    projPrefId = _inventory[Decoration.STAR];
+        //    _indices.Clear();
+        //    _inventory.Clear();
+        //    Debug.Log("INP");
+        //}
+        //else
+        //{
+            projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
             _inventory.TryGetValue((Decoration)projPrefId, out count);
-        }
+
+            while (count <= 0)
+            {
+                _inventory.Remove((Decoration)projPrefId);
+                _indices.Remove(projPrefId);
+
+                if (HasOnlyStar())
+                {
+
+                    projPrefId = (int)Decoration.STAR;
+                    _inventory.TryGetValue((Decoration)projPrefId, out count);
+
+                    _indices.Clear();
+                    _inventory.Clear();
+
+                    break;
+
+            }
+            else {
+
+                    projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
+                    _inventory.TryGetValue((Decoration)projPrefId, out count);
+
+                }
+
+                
+            }
+
+        //}
+
+        
 
 
         PoolsManager.GetObject(projPrefId, position, rotation).TryGetComponent<Projectile>(out result);
@@ -112,8 +149,17 @@ static class Inventory
 
 }
 
-enum Decoration : int { 
+enum Decoration : int {
 
-    ORANGE_BALL, TEDDY_BEAR, CANDY_CANE, STAR, RED_BALL, SNOWMAN, SOCK, BELL, PRESENT_BLUE, PRESENT_WHITE
+    STAR,
+    TEDDY_BEAR,
+    BLUE_PRESENT, 
+    WHITE_PRESENT,
+    BELL,
+    CANDY_CANE,
+    ORANGE_BALL,
+    RED_BALL, 
+    SNOWMAN, 
+    SOCK   
 
 }
