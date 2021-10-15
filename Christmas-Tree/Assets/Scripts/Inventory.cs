@@ -17,15 +17,15 @@ static class Inventory
         _indices = new List<int>((int[]) Enum.GetValues(typeof(Decoration)));
         _inventory = new Dictionary<Decoration, int>();
         
-        //_inventory.Add(Decoration.TEDDY_BEAR, 1);
-        //_inventory.Add(Decoration.BELL, 3);
-        //_inventory.Add(Decoration.CANDY_CANE, 4);
+        _inventory.Add(Decoration.TEDDY_BEAR, 1);
+        _inventory.Add(Decoration.BELL, 3);
+        _inventory.Add(Decoration.CANDY_CANE, 4);
         _inventory.Add(Decoration.ORANGE_BALL, 4);
-        //_inventory.Add(Decoration.RED_BALL, 4);
-        //_inventory.Add(Decoration.SNOWMAN, 3);
-        //_inventory.Add(Decoration.SOCK, 4);        
+        _inventory.Add(Decoration.RED_BALL, 4);
+        _inventory.Add(Decoration.SNOWMAN, 3);
+        _inventory.Add(Decoration.SOCK, 4);        
         _inventory.Add(Decoration.BLUE_PRESENT, 1);
-        //_inventory.Add(Decoration.WHITE_PRESENT, 1);
+        _inventory.Add(Decoration.WHITE_PRESENT, 1);
         _inventory.Add(Decoration.STAR, 1);
 
     }
@@ -55,48 +55,42 @@ static class Inventory
         Projectile result = null;
         int projPrefId;
 
-        //if (HasOnlyStar()) { 
+        projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
+        _inventory.TryGetValue((Decoration)projPrefId, out count);
 
-        //    projPrefId = _inventory[Decoration.STAR];
-        //    _indices.Clear();
-        //    _inventory.Clear();
-        //    Debug.Log("INP");
-        //}
-        //else
-        //{
-            projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
-            _inventory.TryGetValue((Decoration)projPrefId, out count);
+        while (count <= 0)
+        {
+            _inventory.Remove((Decoration)projPrefId);
+            _indices.Remove(projPrefId);
 
-            while (count <= 0)
+            if (HasOnlyStar())
             {
-                _inventory.Remove((Decoration)projPrefId);
-                _indices.Remove(projPrefId);
 
-                if (HasOnlyStar())
-                {
+                projPrefId = (int)Decoration.STAR;
+                _inventory.TryGetValue((Decoration)projPrefId, out count);
 
-                    projPrefId = (int)Decoration.STAR;
-                    _inventory.TryGetValue((Decoration)projPrefId, out count);
+                _indices.Clear();
+                _inventory.Clear();
 
-                    _indices.Clear();
-                    _inventory.Clear();
-
-                    break;
+                break;
 
             }
-            else {
+            else
+            {
 
-                    projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
-                    _inventory.TryGetValue((Decoration)projPrefId, out count);
+                projPrefId = _indices[UnityEngine.Random.Range(StartPosition, _indices.Count)];
+                _inventory.TryGetValue((Decoration)projPrefId, out count);
 
-                }
-
-                
             }
 
-        //}
 
-        
+        }
+
+
+
+
+
+
 
 
         PoolsManager.GetObject(projPrefId, position, rotation).TryGetComponent<Projectile>(out result);
