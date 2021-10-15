@@ -28,10 +28,16 @@ public class RotatingPlatform : MonoBehaviour
 
         float score = ScoreCounter.Instance.GetCount();
 
-        if (_stage == 0 && score >= 100.0f || _stage == 1 && score >= 200.0f || _stage == 2 && score >= 300.0f) {
+        if (_stage == 0 && score >= 100.0f || _stage == 1 && score >= 200.0f || _stage == 2 && score >= 300.0f)
+        {
 
             Debug.Log("NEXT STAGE");
             NextStage();
+        }
+        else if (_stage == 3) { 
+        
+
+        
         }
 
 
@@ -57,6 +63,12 @@ public class RotatingPlatform : MonoBehaviour
         _rotationSpeed = new Vector3(0.0f, UnityEngine.Random.Range(direction * 2.5f, direction * 5.0f), 0.0f);
 
         _stage++;
+    }
+
+    private void FinishSatge() { 
+    
+
+    
     }
 
 

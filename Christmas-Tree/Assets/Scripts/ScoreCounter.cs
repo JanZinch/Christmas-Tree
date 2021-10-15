@@ -26,7 +26,7 @@ public class ScoreCounter : MonoBehaviour
 
     private void OnEnable()
     {
-        Thrower.OnInventoryEmpty += delegate() { _counterTextAnim.SetTrigger(FinishParam); };
+        GameManager.Instance.OnSessionFinish += delegate() { _counterTextAnim.SetTrigger(FinishParam); };
     }
 
     private void UpdateText()
