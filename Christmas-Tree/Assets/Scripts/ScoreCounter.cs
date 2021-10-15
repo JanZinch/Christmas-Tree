@@ -25,7 +25,10 @@ public class ScoreCounter : MonoBehaviour
     {
         _counterText.text = _count.ToString();
 
-        _differenceTextAnim.SetBool(ViewParam, true);
+        // _differenceTextAnim.SetBool(ViewParam, true);
+
+        
+        _differenceTextAnim.SetTrigger(ViewParam);
 
     }
 
@@ -35,12 +38,15 @@ public class ScoreCounter : MonoBehaviour
     public void Add(float count) {
 
         _count += count;
+        _differenceText.text = "+" + count;
+
         UpdateText();
     }
 
     public void Substract(float count) {
 
         _count -= count;
+        _differenceText.text = "-" + count;
         UpdateText();
     }
 
