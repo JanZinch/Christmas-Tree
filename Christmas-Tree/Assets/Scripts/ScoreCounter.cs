@@ -22,6 +22,8 @@ public class ScoreCounter : MonoBehaviour
     {
         if (Instance != null) throw new Exception("There can be only one ScoreCounter object.");
         Instance = this;
+
+        GameManager.OnDestroyScene += delegate () { Instance = null; };
     }
 
     private void OnEnable()

@@ -11,11 +11,13 @@ public class GameManager : MonoBehaviour
 
     public event Action OnSessionFinish = null;
     public event Action OnSessionStart = null;
+    public static event Action OnDestroyScene = null;
 
     private void Awake()
     {
         if (Instance != null) throw new Exception("There can be only one GameManager object.");
         Instance = this;
+        //OnDestroyScene = null;
     }
 
     void Start()
@@ -26,8 +28,11 @@ public class GameManager : MonoBehaviour
 
     private void FinishGameSession() {
 
-        GameSessionState = SessionState.FINISHED;
-        OnSessionFinish?.Invoke();    
+        if (GameSessionState != SessionState.FINISHED) {
+
+            GameSessionState = SessionState.FINISHED;
+            OnSessionFinish?.Invoke();
+        }           
     }
 
     private void OnEnable()
@@ -49,7 +54,14 @@ public class GameManager : MonoBehaviour
         }
         else if (GameSessionState == SessionState.FINISHED) {
 
-            SceneManager.LoadScene(GameSceneIndex);       
+            Debug.Log("New!");
+
+            Instance = null;
+
+            OnDestroyScene += delegate () { SceneManager.LoadScene(GameSceneIndex); };
+
+            OnDestroyScene();
+                
         }
     }
 

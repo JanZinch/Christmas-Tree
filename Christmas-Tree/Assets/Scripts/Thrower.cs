@@ -131,6 +131,8 @@ public class Thrower : MonoBehaviour
     {
         StartPoint = _startPoint;
         _rechargeWaiting = new WaitForSeconds(_recharge);
+
+        GameManager.OnDestroyScene += delegate () { OnInventoryEmpty = null; StartPoint = null; };
     }
 
     private void Start() {
