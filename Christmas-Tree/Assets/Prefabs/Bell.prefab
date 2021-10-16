@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 29384430753252295}
   - component: {fileID: 29384430753252294}
   - component: {fileID: 29384430753252289}
+  - component: {fileID: 6602843600639232730}
   m_Layer: 0
   m_Name: Bell
   m_TagString: Untagged
@@ -76,8 +77,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.16, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.17, y: 0.02, z: 0.17}
+  m_Center: {x: 0, y: -0.05, z: 0}
 --- !u!114 &29384430753252289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,6 +91,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69bbe305b17d3547b38df11aade9406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &6602843600639232730
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 29384430753252288}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.05
+  m_Height: 0.15
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.02, z: 0}
 --- !u!1 &29384430753288726
 GameObject:
   m_ObjectHideFlags: 0

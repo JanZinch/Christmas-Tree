@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 6305089208202751193}
   - component: {fileID: 6305089208202751192}
   - component: {fileID: 6984583337286541387}
-  - component: {fileID: 6305089208202751210}
+  - component: {fileID: 2962744396012445200}
+  - component: {fileID: 188776265534348141}
+  - component: {fileID: 7435292730507212548}
   m_Layer: 0
   m_Name: Star
   m_TagString: Untagged
@@ -77,19 +79,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69bbe305b17d3547b38df11aade9406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &6305089208202751210
+--- !u!136 &2962744396012445200
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305089208202751189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &188776265534348141
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305089208202751189}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0.1, z: 0}
+--- !u!135 &7435292730507212548
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6305089208202751189}
-  m_Material: {fileID: 13400000, guid: eb97f62589bf0004fa177cdee244751a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: -0.2, z: 0}
 --- !u!1001 &3015769858317523773
 PrefabInstance:
   m_ObjectHideFlags: 0

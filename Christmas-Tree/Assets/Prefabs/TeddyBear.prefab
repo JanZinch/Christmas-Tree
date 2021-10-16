@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1521121089463782190}
   - component: {fileID: 2482062987143759805}
   - component: {fileID: 145468727032256300}
+  - component: {fileID: 4610944681290607286}
   m_Layer: 0
   m_Name: TeddyBear
   m_TagString: Untagged
@@ -87,10 +88,23 @@ CapsuleCollider:
   m_Material: {fileID: 13400000, guid: eb97f62589bf0004fa177cdee244751a, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 5
+  m_Radius: 1.5
+  m_Height: 4.5
   m_Direction: 1
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!65 &4610944681290607286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521121089463782179}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4, y: 1, z: 1}
+  m_Center: {x: 0, y: -1.6, z: 0}
 --- !u!1001 &7091992059052859130
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9b1e647e94b55643afb1a6286d973da, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.35
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f9b1e647e94b55643afb1a6286d973da, type: 3}
       propertyPath: m_LocalPosition.z
