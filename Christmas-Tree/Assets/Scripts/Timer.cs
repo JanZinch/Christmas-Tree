@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System;
 using UnityEngine;
 using TMPro;
 
@@ -10,6 +10,9 @@ public class Timer : MonoBehaviour
     [SerializeField] private float _leftTime = 0.0f;
     private float _gameTime = 0.0f;
 
+    private static event Action OnTimeIsUp = null;
+
+    private bool _timeIsUp = false;
 
     private string ConvertTimeFormat(float time)
     {
@@ -27,18 +30,33 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.Instance.GameSessionState == SessionState.PLAYED && !_timeIsUp) {
+
+            if (_leftTime <= 0)
+            {
+                _timeIsUp = true;
+                OnTimeIsUp?.Invoke();
+            }
+
+            _timerUIText.text = ConvertTimeFormat(_leftTime);
+            _gameTime += Time.deltaTime;
 
 
-        _timerUIText.text = ConvertTimeFormat(_leftTime);
-        _gameTime += Time.deltaTime;
+
+            if (_gameTime >= Time.timeScale)
+            {
+
+                _leftTime--;
+                _gameTime = 0;
+            }
 
 
 
-        if (_gameTime >= 1) {
 
-            _leftTime--;
-            _gameTime = 0;       
         }
+
+
+        
 
 
     }

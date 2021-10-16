@@ -13,8 +13,13 @@ static class Inventory
 
     static Inventory() {
 
+        Fill();
+        GameManager.OnDestroyScene += delegate () { Fill(); };
+    }
 
-        _indices = new List<int>((int[]) Enum.GetValues(typeof(Decoration)));
+    private static void Fill() {
+
+        _indices = new List<int>((int[])Enum.GetValues(typeof(Decoration)));
         _inventory = new Dictionary<Decoration, int>();
 
         _inventory.Add(Decoration.BLUE_PRESENT, 1);
@@ -29,9 +34,8 @@ static class Inventory
          _inventory.Add(Decoration.SOCK, 4);                
          _inventory.Add(Decoration.WHITE_PRESENT, 1);*/
 
-
-        GameManager.OnDestroyScene += delegate () { _inventory = null; _indices = null; };
     }
+
 
     private static bool IsEmpty() {
 

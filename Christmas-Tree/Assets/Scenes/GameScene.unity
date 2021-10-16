@@ -1870,7 +1870,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 0ce2c502467c0c74faeeaf4729c9b9d6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 7ac3f4f1cd03e974fa96791fc0516227, type: 2}
+      objectReference: {fileID: 2100000, guid: d0233752929f1614f9ed0cbf45e5b001, type: 2}
     - target: {fileID: 919132149155446097, guid: 0ce2c502467c0c74faeeaf4729c9b9d6, type: 3}
       propertyPath: m_Name
       value: CylinderPlatform
@@ -1987,7 +1987,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 553648127
+    rgba: 16777215
   m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3

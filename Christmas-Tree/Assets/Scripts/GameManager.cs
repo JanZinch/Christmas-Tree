@@ -17,16 +17,21 @@ public class GameManager : MonoBehaviour
     {
         if (Instance != null) throw new Exception("There can be only one GameManager object.");
         Instance = this;
+
+        GameSessionState = SessionState.STARTED;
+
         //OnDestroyScene = null;
     }
 
     void Start()
     {
-
+        Debug.Log(GameSessionState);
     }
 
 
     private void FinishGameSession() {
+
+        Debug.Log("CALL!");
 
         if (GameSessionState != SessionState.FINISHED) {
 
@@ -58,10 +63,16 @@ public class GameManager : MonoBehaviour
 
             Instance = null;
 
-            OnDestroyScene += delegate () { SceneManager.LoadScene(GameSceneIndex); };
+
+            //OnDestroyScene += delegate () { SceneManager.LoadScene(GameSceneIndex); };
 
             OnDestroyScene();
-                
+            
+            
+
+            SceneManager.LoadScene(GameSceneIndex);
+            //Application.LoadLevel(GameSceneIndex);
+
         }
     }
 
