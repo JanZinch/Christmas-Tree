@@ -22,6 +22,17 @@ public class Thrower : MonoBehaviour
     public static event Action OnInventoryEmpty = null;
 
 
+    public void DropOutProjectile() {           // Call? in update
+
+        if (_projectile != null) {
+
+            _projectile.Rigidbody.isKinematic = false;
+            _projectile.Rigidbody.AddForce(Vector3.zero);
+            _drawer.RemoveTrajectory();
+        }
+    
+    }
+
     private void OnMouseDown()
     {
         if (_projectile == null || GameManager.Instance.GameSessionState == SessionState.FINISHED || GameManager.Instance.GameSessionState == SessionState.PAUSED) return;
@@ -32,7 +43,7 @@ public class Thrower : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (_projectile == null) return;
+        if (_projectile == null || GameManager.Instance.GameSessionState == SessionState.FINISHED || GameManager.Instance.GameSessionState == SessionState.PAUSED) return;
 
         _currentMousePoint = Input.mousePosition;
         _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, MakeForceFromScreen());

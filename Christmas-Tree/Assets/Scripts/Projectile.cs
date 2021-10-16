@@ -43,8 +43,7 @@ public class Projectile : MonoBehaviour
         else if (!_isAttached && collision.transform.parent != null && collision.transform.parent.TryGetComponent<RotatingPlatform>(out RotatingPlatform rotatingPlatform)) {
             
             
-
-            if (this.IsMassive)
+            if (this.IsMassive && GameManager.Instance.GameSessionState != SessionState.FINISHED)
             {
                 this.Rigidbody.isKinematic = true;
                 ScoreCounter.Instance.Add(this._price);
@@ -62,7 +61,7 @@ public class Projectile : MonoBehaviour
 
         if (!_isAttached && !_isFailed && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
         {
-            if (IsMassive)
+            if (IsMassive || GameManager.Instance.GameSessionState == SessionState.FINISHED)
             {
                 this.Rigidbody.velocity = Vector3.zero;
                 Vector3 resist = Vector3.Normalize(Thrower.StartPoint.position - this.transform.position) * christmasTree.BranchesForce;

@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public event Action OnSessionStart = null;
     public static event Action OnDestroyScene = null;
 
+    [SerializeField] private Thrower _thrower = null;
+
     private void Awake()
     {
         if (Instance != null) throw new Exception("There can be only one GameManager object.");
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
         if (GameSessionState != SessionState.FINISHED) {
 
             GameSessionState = SessionState.FINISHED;
+            _thrower.DropOutProjectile();
             OnSessionFinish?.Invoke();
         }           
     }
