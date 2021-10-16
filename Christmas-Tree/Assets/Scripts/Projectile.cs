@@ -59,7 +59,7 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (!_isAttached && !_isFailed && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
+        if (!_isAttached && !_isFailed && other.transform.parent != null && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
         {
             if (IsMassive || GameManager.Instance.GameSessionState == SessionState.FINISHED)
             {

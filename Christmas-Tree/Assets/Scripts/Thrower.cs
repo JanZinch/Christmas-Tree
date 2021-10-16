@@ -29,9 +29,20 @@ public class Thrower : MonoBehaviour
             _projectile.Rigidbody.isKinematic = false;
             _projectile.Rigidbody.AddForce(Vector3.zero);
             _drawer.RemoveTrajectory();
-        }
-    
+        }    
     }
+
+    public void TakeBackProjectile(Projectile projectile) {
+
+        StopAllCoroutines();
+
+        projectile.Rigidbody.isKinematic = true;
+        projectile.transform.position = _startPoint.position;
+        projectile.transform.rotation = Quaternion.identity;
+
+        _projectile = projectile;
+    }
+
 
     private void OnMouseDown()
     {
