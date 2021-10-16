@@ -18,6 +18,9 @@ public class ScoreCounter : MonoBehaviour
     private const string ViewParam = "View";
     private const string FinishParam = "Finish";
 
+    public float Score { get { return _count; } private set { _count = value; } }
+
+
     private void Awake()
     {
         if (Instance != null) throw new Exception("There can be only one ScoreCounter object.");

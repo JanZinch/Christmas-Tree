@@ -14,6 +14,9 @@ public class Timer : MonoBehaviour
 
     private bool _timeIsUp = false;
 
+    public float LeftTime { get { return _leftTime; } private set { _leftTime = value; } }
+
+
     private void Start()
     {
         _timerUIText.text = ConvertTimeFormat(_leftTime);
@@ -31,6 +34,12 @@ public class Timer : MonoBehaviour
         }
 
         return string.Format("{0:D2}:{1:D2}", (int)minutes, (int)seconds);
+    }
+
+    public void Substract(float seconds) {
+
+        _leftTime -= seconds;
+        _timerUIText.text = ConvertTimeFormat(_leftTime);
     }
 
 

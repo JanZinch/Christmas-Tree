@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Thrower _thrower = null;
 
+    private bool _transferAllowed = true;  
+
+
     private void Awake()
     {
         if (Instance != null) throw new Exception("There can be only one GameManager object.");
@@ -61,7 +64,7 @@ public class GameManager : MonoBehaviour
             OnSessionStart?.Invoke();
         
         }
-        else if (GameSessionState == SessionState.FINISHED) {
+        else if (GameSessionState == SessionState.FINISHED && _transferAllowed) {
 
             Debug.Log("New!");
 
