@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScoreCounter : MonoBehaviour
 {
-    public static ScoreCounter Instance { get; private set; }
+    public static ScoreCounter Instance { get; private set; } = null;
 
     [SerializeField] private TextMeshProUGUI _counterText = null;
     [SerializeField] private TextMeshProUGUI _differenceText = null;

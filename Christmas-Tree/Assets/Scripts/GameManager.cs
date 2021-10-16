@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance = null;
+    public static GameManager Instance { get; private set; } = null;
     public SessionState GameSessionState { get; private set; } = SessionState.STARTED;
 
     private const int GameSceneIndex = 0;

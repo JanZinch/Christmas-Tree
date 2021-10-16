@@ -30,7 +30,9 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.Instance.GameSessionState == SessionState.PLAYED && !_timeIsUp) {
+        if (GameManager.Instance == null) return;
+
+        if (!_timeIsUp && GameManager.Instance.GameSessionState == SessionState.PLAYED) {
 
             if (_leftTime <= 0)
             {
