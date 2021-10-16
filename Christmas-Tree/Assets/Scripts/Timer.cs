@@ -14,6 +14,12 @@ public class Timer : MonoBehaviour
 
     private bool _timeIsUp = false;
 
+    private void Start()
+    {
+        _timerUIText.text = ConvertTimeFormat(_leftTime);
+    }
+
+
     private string ConvertTimeFormat(float time)
     {
         float minutes = 0.0f, seconds = time;
