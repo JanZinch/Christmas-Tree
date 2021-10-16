@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timerUIText: {fileID: 681179510}
-  _leftTime: 180
+  _leftTime: 10
 --- !u!4 &70336898
 Transform:
   m_ObjectHideFlags: 0

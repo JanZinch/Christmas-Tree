@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         Thrower.OnInventoryEmpty += FinishGameSession;
+        Timer.OnTimeIsUp += FinishGameSession;
     }
 
 

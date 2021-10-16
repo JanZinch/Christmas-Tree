@@ -10,7 +10,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private float _leftTime = 0.0f;
     private float _gameTime = 0.0f;
 
-    private static event Action OnTimeIsUp = null;
+    public static event Action OnTimeIsUp = null;
 
     private bool _timeIsUp = false;
 

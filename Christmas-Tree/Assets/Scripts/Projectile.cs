@@ -42,7 +42,7 @@ public class Projectile : MonoBehaviour
         }
         else if (!_isAttached && collision.transform.parent != null && collision.transform.parent.TryGetComponent<RotatingPlatform>(out RotatingPlatform rotatingPlatform)) {
             
-            rotatingPlatform?.StartRotationAroundTree(this.transform);
+            
 
             if (this.IsMassive)
             {
@@ -51,7 +51,7 @@ public class Projectile : MonoBehaviour
                 _isAttached = true;                         // mb
             }
 
-
+            rotatingPlatform?.StartRotationAroundTree(this.transform);
         }
 
     }
@@ -76,14 +76,14 @@ public class Projectile : MonoBehaviour
             else {
 
 
-                christmasTree.Platform.StartRotationAroundTree(this.transform);
+                
 
                 this.Rigidbody.isKinematic = true;
 
                 _isAttached = true;
 
                 ScoreCounter.Instance.Add(this._price);
-
+                christmasTree.Platform.StartRotationAroundTree(this.transform);
             }
 
 

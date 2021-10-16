@@ -26,13 +26,13 @@ static class Inventory
         _inventory.Add(Decoration.ORANGE_BALL, 4);
         _inventory.Add(Decoration.STAR, 1);
 
-        /* _inventory.Add(Decoration.TEDDY_BEAR, 1);
-         _inventory.Add(Decoration.BELL, 3);
-         _inventory.Add(Decoration.CANDY_CANE, 4);        
-         _inventory.Add(Decoration.RED_BALL, 4);
-         _inventory.Add(Decoration.SNOWMAN, 3);
-         _inventory.Add(Decoration.SOCK, 4);                
-         _inventory.Add(Decoration.WHITE_PRESENT, 1);*/
+        _inventory.Add(Decoration.TEDDY_BEAR, 1);
+        _inventory.Add(Decoration.BELL, 3);
+        _inventory.Add(Decoration.CANDY_CANE, 4);
+        _inventory.Add(Decoration.RED_BALL, 4);
+        _inventory.Add(Decoration.SNOWMAN, 3);
+        _inventory.Add(Decoration.SOCK, 4);
+        _inventory.Add(Decoration.WHITE_PRESENT, 1);
 
     }
 

@@ -24,7 +24,7 @@ public class Thrower : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (_projectile == null) return;
+        if (_projectile == null || GameManager.Instance.GameSessionState == SessionState.FINISHED || GameManager.Instance.GameSessionState == SessionState.PAUSED) return;
 
         _startMousePoint = _currentMousePoint = Input.mousePosition;
         _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, MakeForceFromScreen());
@@ -43,16 +43,22 @@ public class Thrower : MonoBehaviour
     {
         if (_projectile == null) return;
 
-        Vector3 force = MakeForceFromScreen();
-
-        _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, force);
         _projectile.Rigidbody.isKinematic = false;
-        _projectile.Rigidbody.AddForce(force);
+        Vector3 force = Vector3.zero;
 
-        StartCoroutine(SetProjectileToScene(_rechargeWaiting));
+        if (GameManager.Instance.GameSessionState == SessionState.FINISHED)
+        {
+            _projectile.Rigidbody.AddForce(force);
+        }
+        else {
 
+            force = MakeForceFromScreen();
+            _drawer.UpdateTrajectory(_projectile.Rigidbody, _projectile.transform.position, force);
+            _projectile.Rigidbody.AddForce(force);
+            StartCoroutine(SetProjectileToScene(_rechargeWaiting));
+        }
+     
         _drawer.RemoveTrajectory();
-
         _projectile = null;
     }
 
