@@ -4,13 +4,13 @@ using UnityEngine;
 public class ReturnProjectileZone : MonoBehaviour
 {
     [SerializeField] private Thrower _thrower = null;
-
+    [SerializeField] private float _returningSpeed = 10.0f; 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<Projectile>(out Projectile projectile)) {
+        if (GameManager.Instance.GameSessionState != SessionState.FINISHED && other.TryGetComponent<Projectile>(out Projectile projectile)) {
 
-            _thrower.TakeBackProjectile(projectile);
+            _thrower.TakeBackProjectile(projectile, _returningSpeed);
 
             Debug.Log("COLLISISON!");
         
@@ -20,15 +20,4 @@ public class ReturnProjectileZone : MonoBehaviour
     }
 
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
