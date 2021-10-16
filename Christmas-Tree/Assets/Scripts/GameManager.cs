@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Thrower _thrower = null;
 
-    private bool _transferAllowed = true;  
+    [SerializeField] private UIManager _uiManager = null;   
 
 
     private void Awake()
@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
             OnSessionStart?.Invoke();
         
         }
-        else if (GameSessionState == SessionState.FINISHED && _transferAllowed) {
+        else if (GameSessionState == SessionState.FINISHED && _uiManager.CalculationsPerformed) {
 
             Debug.Log("New!");
 

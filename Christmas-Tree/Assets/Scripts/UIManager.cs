@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
 
     private WaitForSeconds _calculationWaiting = null;
 
+    public bool CalculationsPerformed { get; private set; } = false;
+
     private void Awake()
     {
         _calculationWaiting = new WaitForSeconds(_calculationWaitingSeconds);
@@ -26,7 +28,7 @@ public class UIManager : MonoBehaviour
         if (_instructionTextAnim == null) Debug.Log("TextAnim is null");
 
         GameManager.Instance.OnSessionStart += delegate () { _instructionTextAnim.SetTrigger(StartParam); };
-        GameManager.Instance.OnSessionFinish += delegate () { _continueTextAnim.SetTrigger(StartParam); };
+        //GameManager.Instance.OnSessionFinish += delegate () { _continueTextAnim.SetTrigger(StartParam); };
         GameManager.Instance.OnSessionFinish += delegate () { _scoreLabelAnim.SetTrigger(ViewParam); };
 
         GameManager.Instance.OnSessionFinish += delegate () { StartCoroutine(AddTimeBonus()); };
@@ -42,9 +44,11 @@ public class UIManager : MonoBehaviour
 
             ScoreCounter.Instance.Add(1.0f);
 
-            yield return _calculationWaiting;
-        
+            yield return _calculationWaiting;        
         }
+
+        _continueTextAnim.SetTrigger(StartParam);
+        CalculationsPerformed = true;
 
         yield return null;
 

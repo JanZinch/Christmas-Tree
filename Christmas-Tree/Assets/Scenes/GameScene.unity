@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timerUIText: {fileID: 681179510}
-  _leftTime: 10
+  _leftTime: 90
 --- !u!4 &70336898
 Transform:
   m_ObjectHideFlags: 0
@@ -2260,6 +2260,8 @@ MonoBehaviour:
   _instructionTextAnim: {fileID: 1971202915}
   _continueTextAnim: {fileID: 1365804086}
   _scoreLabelAnim: {fileID: 1033330206}
+  _timer: {fileID: 70336897}
+  _calculationWaitingSeconds: 0.1
 --- !u!114 &1398861526
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2273,6 +2275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _thrower: {fileID: 1398861521}
+  _uiManager: {fileID: 1398861525}
 --- !u!1001 &1488860505
 PrefabInstance:
   m_ObjectHideFlags: 0
