@@ -22,11 +22,11 @@ public class Projectile : MonoBehaviour
             if (this._isAttached)
             {
                 ScoreCounter.Instance.Substract(this._price);
-                Debug.Log("THIS");
+                //Debug.Log("THIS");
             }
             else if (otherProjectile._isAttached) {
 
-                Debug.Log("OTHER");
+                //Debug.Log("OTHER");
                 ScoreCounter.Instance.Substract(otherProjectile._price);
             }
 
@@ -69,7 +69,7 @@ public class Projectile : MonoBehaviour
 
                 this.Rigidbody.AddForce(resist);
 
-                Debug.Log("FORCE: " + resist);
+               // Debug.Log("FORCE: " + resist);
             
             }
             else {

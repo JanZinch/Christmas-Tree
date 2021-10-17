@@ -8,7 +8,7 @@ public class RotatingPlatform : MonoBehaviour
     [SerializeField] private Vector3 _startRotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
     [SerializeField] private Vector3 _rotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
     [SerializeField] private float _maxSpeedIncrement = 1.5f;
-    [SerializeField] private float _minSpeedIncrement = 0.5f;
+    [SerializeField] private float _minSpeedIncrement = 0.75f;
 
 
     //[SerializeField] private List<Transform> _attachedObjects = null;
@@ -17,12 +17,39 @@ public class RotatingPlatform : MonoBehaviour
 
     public event Action OnPlatformRotate = null;
 
+    private Stage _first = new Stage(1, 100.0f);
+    private Stage _second = new Stage(2, 200.0f);
+    private Stage _third = new Stage(3, 300.0f);
+
+
+    private struct Stage {
+
+        public int Number { get; private set; }
+        public float ActivationScore { get; private set; }
+
+        public Stage(int number, float activationScore) {
+
+            Number = number;
+            ActivationScore = activationScore;        
+        }
+
+        public bool TransitionAllowed(int currentStageNumber, float currentScore) {
+
+            return Number > currentStageNumber && currentScore >= ActivationScore;       
+        }
+
+    }
+
+
     private void Awake()
     {
         _rotationSpeed = _startRotationSpeed;
 
         Debug.Log("First stage. Spped: " + _rotationSpeed);
         //_attachedObjects = new List<Transform>();
+
+        
+
     }
 
     private void OnEnable()
@@ -30,6 +57,9 @@ public class RotatingPlatform : MonoBehaviour
         OnPlatformRotate += delegate() { transform.Rotate(Vector3.up, _rotationSpeed.y, Space.Self); };
 
         GameManager.Instance.OnSessionFinish += delegate { StopAllCoroutines(); FinishSatge(); };
+
+        
+
     }
 
 
@@ -37,27 +67,38 @@ public class RotatingPlatform : MonoBehaviour
 
         float score = ScoreCounter.Instance.GetCount();
 
-        if (_stage == 0 && score >= 100.0f || _stage == 1 && score >= 200.0f || _stage == 2 && score >= 300.0f)
+        if (_first.TransitionAllowed(_stage, score) || _second.TransitionAllowed(_stage, score) || _third.TransitionAllowed(_stage, score))
         {
-
-            
             NextStage();
         }
-        else if (_stage == 3) { 
-        
+    }
 
-        
+    private IEnumerator Tilt(Vector3 targetEulerAngles)
+    {
+        float time = 0.0f;
+        Vector3 startEulerAngles = this.transform.eulerAngles;
+        WaitForSeconds wait = new WaitForSeconds(0.1f);
+
+        while (!SafeEquals(time, 1.0f))
+        {            
+            time += 0.1f;
+            this.transform.eulerAngles = new Vector3(Mathf.LerpAngle(startEulerAngles.x, targetEulerAngles.x, time), transform.eulerAngles.y, Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, time));
+            yield return wait;
         }
 
+        Debug.Log("Rotation complete!");
 
-        //if (score > 100.0f && score < 200.0f || score >= 200.0f) NextStage();
-    
+        yield return null;
+
     }
 
 
     private void NextStage() {
 
-        this.transform.eulerAngles = new Vector3(UnityEngine.Random.Range(0.0f, 3.5f), this.transform.eulerAngles.y, UnityEngine.Random.Range(0.0f, 3.5f));
+        Vector3 targetEulerAngles = new Vector3(UnityEngine.Random.Range(0.0f, 3.5f), this.transform.eulerAngles.y, UnityEngine.Random.Range(0.0f, 3.5f));
+
+        StartCoroutine(Tilt(targetEulerAngles));
+
 
         int direction = UnityEngine.Random.Range(0, 2);
         if (direction == 0)
@@ -85,14 +126,16 @@ public class RotatingPlatform : MonoBehaviour
         Vector3 _targetSpeed = _startRotationSpeed;
         _targetSpeed.y *= _rotationSpeed.normalized.y;
         StartCoroutine(AccelerateRotation(_targetSpeed));
+
+        Vector3 targetEulerAngles = new Vector3(0.0f, this.transform.eulerAngles.y, 0.0f);
+        StartCoroutine(Tilt(targetEulerAngles));
+
     }
 
 
     private bool SafeEquals(float a, float b) {
 
         const float e = 0.1f;
-
-        Debug.Log(Mathf.Abs(a - b));
 
         return Mathf.Abs(a - b) < e;
     
@@ -109,12 +152,12 @@ public class RotatingPlatform : MonoBehaviour
                 
         WaitForSeconds wait = new WaitForSeconds(0.1f);
 
-        Debug.Log("Target: " + _targetSpeed);
+        //Debug.Log("Target: " + _targetSpeed);
 
 
         while (!SafeEquals(_rotationSpeed.y, _targetSpeed.y)) {
 
-            Debug.Log("Current: " + _rotationSpeed);
+            //Debug.Log("Current: " + _rotationSpeed);
 
             _rotationSpeed.y += Acceleration;
 
@@ -123,7 +166,7 @@ public class RotatingPlatform : MonoBehaviour
         }
 
 
-        Debug.Log("Complete!");
+        //Debug.Log("Complete!");
 
         yield return null;
     
