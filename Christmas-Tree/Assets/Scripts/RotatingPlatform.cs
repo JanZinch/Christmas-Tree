@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RotatingPlatform : MonoBehaviour
 {
+    [SerializeField] private Vector3 _startRotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
     [SerializeField] private Vector3 _rotationSpeed = new Vector3(0.0f, 2.5f, 0.0f);
     [SerializeField] private float _maxSpeedIncrement = 1.5f;
     [SerializeField] private float _minSpeedIncrement = 0.5f;
@@ -18,6 +19,8 @@ public class RotatingPlatform : MonoBehaviour
 
     private void Awake()
     {
+        _rotationSpeed = _startRotationSpeed;
+
         Debug.Log("First stage. Spped: " + _rotationSpeed);
         //_attachedObjects = new List<Transform>();
     }
@@ -25,6 +28,8 @@ public class RotatingPlatform : MonoBehaviour
     private void OnEnable()
     {
         OnPlatformRotate += delegate() { transform.Rotate(Vector3.up, _rotationSpeed.y, Space.Self); };
+
+        GameManager.Instance.OnSessionFinish += delegate { StopAllCoroutines(); FinishSatge(); };
     }
 
 
@@ -75,6 +80,13 @@ public class RotatingPlatform : MonoBehaviour
         _stage++;
     }
 
+    private void FinishSatge()
+    {
+        Vector3 _targetSpeed = _startRotationSpeed;
+        _targetSpeed.y *= _rotationSpeed.normalized.y;
+        StartCoroutine(AccelerateRotation(_targetSpeed));
+    }
+
 
     private bool SafeEquals(float a, float b) {
 
@@ -119,11 +131,7 @@ public class RotatingPlatform : MonoBehaviour
 
 
 
-    private void FinishSatge() { 
-    
-
-    
-    }
+   
 
 
     public void StartRotationAroundTree(Transform projectile) {
