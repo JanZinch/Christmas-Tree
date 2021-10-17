@@ -2,17 +2,17 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private Rigidbody _rigidbody = null;
+    [SerializeField] protected Rigidbody _rigidbody = null;
 
-    [SerializeField] private float _price = default;
+    [SerializeField] protected float _price = default;
 
-    private bool _isAttached = false;
-    private bool _isFailed = false;
+    protected bool _isAttached = false;
+    protected bool _isFailed = false;
     public bool IsMassive { get; set; } = false;
 
     public Rigidbody Rigidbody { get { return _rigidbody; } private set { _rigidbody = value; } }
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.TryGetComponent<Projectile>(out Projectile otherProjectile))
         {
@@ -56,7 +56,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
 
         if (!_isAttached && !_isFailed && other.transform.parent != null && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
@@ -96,7 +96,7 @@ public class Projectile : MonoBehaviour
     }
 
 
-    private void OnCollisionExit(Collision collision){
+    protected void OnCollisionExit(Collision collision){
 
         if (!_isAttached && collision.transform.parent != null && collision.transform.parent.TryGetComponent<RotatingPlatform>(out RotatingPlatform rotatingPlatform))
         {

@@ -82,7 +82,11 @@ public class RotatingPlatform : MonoBehaviour
         while (!SafeEquals(time, 1.0f))
         {            
             time += 0.1f;
-            this.transform.eulerAngles = new Vector3(Mathf.LerpAngle(startEulerAngles.x, targetEulerAngles.x, time), transform.eulerAngles.y, Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, time));
+
+            float angleX = Mathf.LerpAngle(startEulerAngles.x, targetEulerAngles.x, time);
+            float angleZ = Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, time);
+
+            this.transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y, angleZ);
             yield return wait;
         }
 

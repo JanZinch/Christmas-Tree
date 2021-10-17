@@ -9,15 +9,4 @@ public class ChristmasTree : MonoBehaviour
     public RotatingPlatform Platform { get { return _rotatingPlatform; } private set { _rotatingPlatform = value; } }
     public float BranchesForce { get { return _branchesForce; } private set { _branchesForce = value; } }
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
