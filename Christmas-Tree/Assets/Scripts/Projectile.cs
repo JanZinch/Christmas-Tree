@@ -47,7 +47,7 @@ public class Projectile : MonoBehaviour
             {
                 this.Rigidbody.isKinematic = true;
                 ScoreCounter.Instance.Add(this._price);
-                _isAttached = true;                         // mb
+                _isAttached = true;                         
             }
 
             rotatingPlatform?.StartRotationAroundTree(this.transform);

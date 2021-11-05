@@ -73,26 +73,30 @@ public class RotatingPlatform : MonoBehaviour
         }
     }
 
-    private IEnumerator Tilt(Vector3 targetEulerAngles)
+    private IEnumerator Tilt(Vector3 targetEulerAngles, Action callback = null)
     {
         float time = 0.0f;
         Vector3 startEulerAngles = this.transform.eulerAngles;
         WaitForSeconds wait = new WaitForSeconds(0.1f);
 
-        while (!SafeEquals(time, 1.0f))
-        {            
-            time += 0.1f;
+        //while (!SafeEquals(time, 1.0f))
 
-            float angleX = Mathf.LerpAngle(startEulerAngles.x, targetEulerAngles.x, time);
-            float angleZ = Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, time);
+        while (!SafeEquals(this.transform.eulerAngles.x, targetEulerAngles.x))
+        {            
+            time += 0.00001f;
+
+            float angleX = Mathf.LerpAngle(startEulerAngles.x, targetEulerAngles.x, Time.time);
+            float angleZ = Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, Time.time);
 
             this.transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y, angleZ);
             yield return wait;
+
+            //yield return null;
         }
 
         Debug.Log("Rotation complete!");
 
-        yield return null;
+        callback?.Invoke();
 
     }
 
@@ -101,7 +105,7 @@ public class RotatingPlatform : MonoBehaviour
 
         Vector3 targetEulerAngles = new Vector3(UnityEngine.Random.Range(0.0f, 3.5f), this.transform.eulerAngles.y, UnityEngine.Random.Range(0.0f, 3.5f));
 
-        StartCoroutine(Tilt(targetEulerAngles));
+        
 
 
         int direction = UnityEngine.Random.Range(0, 2);
@@ -120,7 +124,11 @@ public class RotatingPlatform : MonoBehaviour
 
         Debug.Log("Next stage. Spped: " + _targetSpeed);
 
-        StartCoroutine(AccelerateRotation(_targetSpeed));
+        StartCoroutine(Tilt(targetEulerAngles, delegate () { StartCoroutine(AccelerateRotation(_targetSpeed)); }));
+
+        //StartCoroutine(AccelerateRotation(_targetSpeed));
+
+        
 
         _stage++;
     }
@@ -129,11 +137,12 @@ public class RotatingPlatform : MonoBehaviour
     {
         Vector3 _targetSpeed = _startRotationSpeed;
         _targetSpeed.y *= _rotationSpeed.normalized.y;
-        StartCoroutine(AccelerateRotation(_targetSpeed));
+        //StartCoroutine(AccelerateRotation(_targetSpeed));
 
         Vector3 targetEulerAngles = new Vector3(0.0f, this.transform.eulerAngles.y, 0.0f);
-        StartCoroutine(Tilt(targetEulerAngles));
+        //StartCoroutine(Tilt(targetEulerAngles));
 
+        StartCoroutine(Tilt(targetEulerAngles, delegate () { StartCoroutine(AccelerateRotation(_targetSpeed)); }));
     }
 
 
@@ -156,21 +165,12 @@ public class RotatingPlatform : MonoBehaviour
                 
         WaitForSeconds wait = new WaitForSeconds(0.1f);
 
-        //Debug.Log("Target: " + _targetSpeed);
-
-
         while (!SafeEquals(_rotationSpeed.y, _targetSpeed.y)) {
-
-            //Debug.Log("Current: " + _rotationSpeed);
 
             _rotationSpeed.y += Acceleration;
 
-            yield return wait;
-        
+            yield return wait;      
         }
-
-
-        //Debug.Log("Complete!");
 
         yield return null;
     
