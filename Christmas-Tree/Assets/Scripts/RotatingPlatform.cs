@@ -89,9 +89,9 @@ public class RotatingPlatform : MonoBehaviour
             float angleZ = Mathf.LerpAngle(startEulerAngles.z, targetEulerAngles.z, Time.time);
 
             this.transform.eulerAngles = new Vector3(angleX, transform.eulerAngles.y, angleZ);
-            yield return wait;
+            //yield return wait;
 
-            //yield return null;
+            yield return null;
         }
 
         Debug.Log("Rotation complete!");
