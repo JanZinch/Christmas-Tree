@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Snow
+    uniqueID: 1966561063
+    locked: 0
   - name: UI
     uniqueID: 1470169259
     locked: 0
