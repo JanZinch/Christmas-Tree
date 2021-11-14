@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7651068469357736376}
   - component: {fileID: 7651068469357736383}
   - component: {fileID: 7651068469357736382}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: BluePresent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +100,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 1cda905d0776c754199e04be35b19f35, type: 3}
       propertyPath: m_Name
       value: Present
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1cda905d0776c754199e04be35b19f35, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1cda905d0776c754199e04be35b19f35, type: 3}
       propertyPath: m_RootOrder

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2313186689895514252}
   - component: {fileID: 2313186689895514255}
   - component: {fileID: 1689979854640057375}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: OrangeBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +100,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 4b0f5f4d0e1459247992f9874f5523d6, type: 3}
       propertyPath: m_Name
       value: Christmas-Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 4b0f5f4d0e1459247992f9874f5523d6, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 4b0f5f4d0e1459247992f9874f5523d6, type: 3}
       propertyPath: m_RootOrder

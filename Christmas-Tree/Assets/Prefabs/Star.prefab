@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2962744396012445200}
   - component: {fileID: 188776265534348141}
   - component: {fileID: 7435292730507212548}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,6 +130,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: b4fdf158773fff744b16a54d1ac9cd8a, type: 3}
       propertyPath: m_Name
       value: Star
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b4fdf158773fff744b16a54d1ac9cd8a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b4fdf158773fff744b16a54d1ac9cd8a, type: 3}
       propertyPath: m_RootOrder

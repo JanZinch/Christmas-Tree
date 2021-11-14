@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2917535413201678473}
   - component: {fileID: 2917535413201678472}
   - component: {fileID: 2917535413201678475}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: WhitePresent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,6 +100,26 @@ PrefabInstance:
     - target: {fileID: 162592, guid: b03851801ad4427499ef073e81939289, type: 3}
       propertyPath: m_Name
       value: GiftBox_Cylinder_TypeA
+      objectReference: {fileID: 0}
+    - target: {fileID: 162592, guid: b03851801ad4427499ef073e81939289, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 167686, guid: b03851801ad4427499ef073e81939289, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 174564, guid: b03851801ad4427499ef073e81939289, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 189996, guid: b03851801ad4427499ef073e81939289, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 199240, guid: b03851801ad4427499ef073e81939289, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 430396, guid: b03851801ad4427499ef073e81939289, type: 3}
       propertyPath: m_RootOrder

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 29384430753252294}
   - component: {fileID: 29384430753252289}
   - component: {fileID: 6602843600639232730}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Bell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 29384430753587844}
   - component: {fileID: 29384430750265948}
   - component: {fileID: 29384430751302372}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Toy_Bell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
