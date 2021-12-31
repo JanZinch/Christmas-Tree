@@ -8,7 +8,8 @@ public class ReturnProjectileZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.GameSessionState != SessionState.FINISHED && other.TryGetComponent<Projectile>(out Projectile projectile)) {
+        if (GameManager.Instance.GameSessionState != SessionState.FINISHED && other.TryGetComponent<Projectile>(out Projectile projectile) 
+        && !projectile.IsFailed) {
 
             _thrower.TakeBackProjectile(projectile, _returningSpeed);
 

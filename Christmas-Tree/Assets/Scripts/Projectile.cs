@@ -7,7 +7,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] protected float _price = default;
 
     protected bool _isAttached = false;
-    protected bool _isFailed = false;
+    public bool IsFailed { get; protected set; } = false;
     public bool IsMassive { get; set; } = false;
 
     public Rigidbody Rigidbody { get { return _rigidbody; } private set { _rigidbody = value; } }
@@ -16,7 +16,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.transform.TryGetComponent<Projectile>(out Projectile otherProjectile))
         {
-            if (this._isFailed || otherProjectile._isFailed) return;
+            if (this.IsFailed || otherProjectile.IsFailed) return;
 
 
             if (this._isAttached)
@@ -32,12 +32,12 @@ public class Projectile : MonoBehaviour
 
 
             this.Rigidbody.isKinematic = false;
-            this._isFailed = true;
+            this.IsFailed = true;
 
             otherProjectile.Rigidbody.isKinematic = false;
 
             otherProjectile._isAttached = false;
-            otherProjectile._isFailed = true;
+            otherProjectile.IsFailed = true;
 
         }
         else if (!_isAttached && collision.transform.parent != null && collision.transform.parent.TryGetComponent<RotatingPlatform>(out RotatingPlatform rotatingPlatform)) {
@@ -49,6 +49,10 @@ public class Projectile : MonoBehaviour
                 ScoreCounter.Instance.Add(this._price);
                 _isAttached = true;                         
             }
+            else
+            {
+                IsFailed = true;
+            }
 
             rotatingPlatform?.StartRotationAroundTree(this.transform);
         }
@@ -59,7 +63,7 @@ public class Projectile : MonoBehaviour
     protected virtual void OnTriggerEnter(Collider other)
     {
 
-        if (!_isAttached && !_isFailed && other.transform.parent != null && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
+        if (!_isAttached && !IsFailed && other.transform.parent != null && other.transform.parent.TryGetComponent<ChristmasTree>(out ChristmasTree christmasTree))
         {
             if (GameManager.Instance.GameSessionState == SessionState.FINISHED)
             {
