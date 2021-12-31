@@ -11,8 +11,5 @@ public class Snow : MonoBehaviour
         _particles.Simulate(_startSimulationTime);
         _particles.Play();
     }
-
-    void Update()
-    {
-    }
+    
 }
