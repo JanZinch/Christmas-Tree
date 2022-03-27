@@ -4,11 +4,8 @@ using UnityEngine;
 
 static class Inventory
 {
-
     private static Dictionary<Decoration, int> _inventory = null;
-
     private static List<int> _indices = null;
-
     private const int StartPosition = 1;
 
     static Inventory() {
@@ -80,7 +77,6 @@ static class Inventory
                 _inventory.Clear();
 
                 break;
-
             }
             else
             {
@@ -89,29 +85,18 @@ static class Inventory
                 _inventory.TryGetValue((Decoration)projPrefId, out count);
 
             }
-
-
         }
-
-
-
-
-
-
-
-
+        
         PoolsManager.GetObject(projPrefId, position, rotation).TryGetComponent<Projectile>(out result);
         _inventory[(Decoration)projPrefId] = --count;
-
-
+        
         if (result != null)
         {
             if (IsMassive((Decoration)projPrefId)) {
 
                 result.IsMassive = true;
             }
-
-
+            
             return result;
         }
         else {
@@ -119,34 +104,7 @@ static class Inventory
             throw new Exception("Bad projectile");
 
         }
-       
-
-
     }
-
-
-
-    //public static Projectile GetRandomProjectile(Vector3 position, Quaternion rotation) {
-
-        
-    //    int projPrefId = UnityEngine.Random.Range(0, _indices.Count);
-
-    //    Projectile result;
-
-    //    if (PoolsManager.GetObject(_indices[projPrefId], position, rotation).TryGetComponent<Projectile>(out result))
-    //    {
-    //        return result;
-    //    }
-    //    else {
-
-    //        throw new Exception("Bad projectile");        
-    //    }
-
-        
-    //}
-
-
-  
 
 }
 

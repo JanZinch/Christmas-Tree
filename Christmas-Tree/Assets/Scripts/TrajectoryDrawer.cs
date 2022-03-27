@@ -15,12 +15,10 @@ public class TrajectoryDrawer : MonoBehaviour
         _points = new List<Vector3>();
     }
 
-
     public void RemoveTrajectory() {
 
         _lineRenderer.positionCount = default;            
     }
-
 
     public void UpdateTrajectory(Rigidbody projectile, Vector3 startPoint, Vector3 force) {
 

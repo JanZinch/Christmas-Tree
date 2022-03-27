@@ -42,9 +42,7 @@ public class Thrower : MonoBehaviour
 
         _projectile = projectile;
 
-
         StartCoroutine(ReturnProjectile(_projectile, _startPoint.position, returningSpeed));
-
     }
 
     public IEnumerator ReturnProjectile(Projectile projectile, Vector3 targetPoint, float returningSpeed) {
@@ -58,8 +56,6 @@ public class Thrower : MonoBehaviour
 
         yield return null;    
     }
-
-
 
     private void OnMouseDown()
     {
@@ -117,10 +113,7 @@ public class Thrower : MonoBehaviour
             differency.z = Mathf.Abs(differency.z);
             differency.x *= -1;
         }
-
         
-        
-
         //Debug.Log("DIF: " + differency);
 
         return differency;
@@ -139,9 +132,7 @@ public class Thrower : MonoBehaviour
 
             _projectile.Rigidbody.isKinematic = true;
         }
-
-      
-    
+        
     }
 
     private IEnumerator SetProjectileToScene(WaitForSeconds wait)
